@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D7FB10B5-03E3-4DE6-9039-165CA3292A99}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Heat2D_solver</RootNamespace>
+    <AssemblyName>Heat2D_solver</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\..\2DTruss_Analyzer_modal_pulse\2DTruss_Analyzer_modal_pulse\bin\Debug\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data_structure\pslg_datastructure.cs" />
+    <Compile Include="Data_structure\static_parameters.cs" />
+    <Compile Include="Front_end\view_settings_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Front_end\view_settings_form.Designer.cs">
+      <DependentUpon>view_settings_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Front_end\Element_prop_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Front_end\Element_prop_form.Designer.cs">
+      <DependentUpon>Element_prop_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Front_end\Edge_prop_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Front_end\Edge_prop_form.Designer.cs">
+      <DependentUpon>Edge_prop_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Front_end\Nodal_prop_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Front_end\Nodal_prop_form.Designer.cs">
+      <DependentUpon>Nodal_prop_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main_form.Designer.cs">
+      <DependentUpon>Main_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Solver\solver_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Solver\solver_form.Designer.cs">
+      <DependentUpon>solver_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Useful_Function\co_functions.cs" />
+    <Compile Include="Useful_Function\matrix_class.cs" />
+    <EmbeddedResource Include="Front_end\view_settings_form.resx">
+      <DependentUpon>view_settings_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Front_end\Element_prop_form.resx">
+      <DependentUpon>Element_prop_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Front_end\Edge_prop_form.resx">
+      <DependentUpon>Edge_prop_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Front_end\Nodal_prop_form.resx">
+      <DependentUpon>Nodal_prop_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main_form.resx">
+      <DependentUpon>Main_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Solver\solver_form.resx">
+      <DependentUpon>solver_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="junk\unused_code.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
