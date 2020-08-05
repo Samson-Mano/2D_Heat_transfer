@@ -1,6 +1,23 @@
 # 2D Heat transfer solver 
-Finite element analysis of steady state 2D heat transfer problems. Heat transfer occurs when there is a temperature difference within a body or within a body and its surrounding medium. Conduction and convection problems are solved using this software. <br /><br /> Heat diffusion equation which is the special case partial differential equation of the Helmholtz equation is solved.<br /><br /><br /><br />
-
+Finite element analysis of steady state 2D heat transfer problems. Heat transfer occurs when there is a temperature difference within a body or within a body and its surrounding medium. Conduction and convection problems are solved using this software. <br /><br /> Heat diffusion equation which is the special case partial differential equation of the Helmholtz equation is solved.<br /><br />
+## Example 1:<br /><br />
+Heat conduction problem with inside and outside convective boundary with 150 deg & 10 ambient temperature respectively. <br /><br />
+![](Images/Example_1_problem.png)<br /><br />
+![](Images/Example_1_mesh.png)<br /><br />
+![](Images/Example_1_solved.png)<br /><br />
+## Example 2:<br /><br />
+Heat transfer problem with point heat source supplied by heating cables and convective boundary at -5 deg ambient temperature. Symmetry boundary condition is used to solve this problem<br /><br />
+![](Images/Example_2_problem.png)<br /><br />
+![](Images/Example_2_soln.png)<br /><br />
+## Example 3:<br /><br />
+Heat transfer problemn with prescribed inner temperature of 140 deg and outter convective boundary with ambient temperature 20 deg.<br /><br />
+![](Images/Example_3_problem.png)<br /><br />
+![](Images/Example_3_soln.png)<br /><br />
+## Example 4:<br /><br />
+A hot pipe running through the thin plate results in the inner surface maintained at 80 deg. The two dimensional fin is subjected to convection with ambient air temperature being 20 deg.
+![](Images/Example_4_problem.png)<br /><br />
+![](Images/Example_4_soln.png)<br /><br />
+<br />
 ## How to use this software:<br />
 Go to Pre-processing -> Import mesh <br />
 <br />
@@ -32,23 +49,6 @@ Mesh format is <br />
 <br />
 Use Pre-processing menu to apply boundary conditions<br />
 <br />
-## Example 1:<br /><br />
-Heat conduction problem with inside and outside convective boundary with 150 deg & 10 ambient temperature respectively. <br /><br />
-![](Images/Example_1_problem.png)<br /><br />
-![](Images/Example_1_mesh.png)<br /><br />
-![](Images/Example_1_solved.png)<br /><br />
-## Example 2:<br /><br />
-Heat transfer problem with point heat source supplied by heating cables and convective boundary at -5 deg ambient temperature. Symmetry boundary condition is used to solve this problem<br /><br />
-![](Images/Example_2_problem.png)<br /><br />
-![](Images/Example_2_soln.png)<br /><br />
-## Example 3:<br /><br />
-Heat transfer problemn with prescribed inner temperature of 140 deg and outter convective boundary with ambient temperature 20 deg.<br /><br />
-![](Images/Example_3_problem.png)<br /><br />
-![](Images/Example_3_soln.png)<br /><br />
-## Example 4:<br /><br />
-A hot pipe running through the thin plate results in the inner surface maintained at 80 deg. The two dimensional fin is subjected to convection with ambient air temperature being 20 deg.
-![](Images/Example_4_problem.png)<br /><br />
-![](Images/Example_4_soln.png)<br /><br />
 # Theory
 Please refer to attachment Theory_behind_2dheat_program.pdf for reference<br /><br />
 # Reference
