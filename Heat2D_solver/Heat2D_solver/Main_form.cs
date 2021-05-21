@@ -12,6 +12,7 @@ using Heat2D_solver.Data_structure;
 using Heat2D_solver.Useful_Function;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Specialized;
+using System.Reflection;
 
 namespace Heat2D_solver
 {
@@ -365,7 +366,7 @@ namespace Heat2D_solver
                         }
 
                         // Remove the nodes which are not connected to any element
-                        foreach(int nd_id in disassociated_node_id)
+                        foreach (int nd_id in disassociated_node_id)
                         {
                             temp_pslg_pointlist.RemoveAt(temp_pslg_pointlist.FindIndex(obj => obj.id == nd_id));
                         }
@@ -489,6 +490,13 @@ namespace Heat2D_solver
             PointF MidPt = new PointF((main_pic.Width / 2), co_functions.tosingle(main_pic.Height / 2));
             static_parameters.main_pic_size = new SizeF(main_pic.Width, main_pic.Height);
             static_parameters.main_pic_midpt = MidPt;
+            this.DoubleBuffered = true;
+
+            // Invoke the panel doublebuggered, using the InvokeMember method
+            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty
+           | BindingFlags.Instance | BindingFlags.NonPublic, null,
+           main_pic, new object[] { true });
+
             mt_pic.Refresh();
         }
 
@@ -553,9 +561,9 @@ namespace Heat2D_solver
                     double scale_xy = main_pic.Width > main_pic.Height ? (main_pic.Height * 0.8) : (main_pic.Width * 0.8);
                     double model_extent_xy = fe_objects.main_mesh.model_extent_x > fe_objects.main_mesh.model_extent_y ? fe_objects.main_mesh.model_extent_x : fe_objects.main_mesh.model_extent_y;
                     double paint_scale = co_functions.tosingle(scale_xy / model_extent_xy);
-                    
+
                     double i_nx = (static_parameters.main_pic_start_pt.X / paint_scale) + fe_objects.main_mesh.model_mid_pt.X;
-                    double i_ny = ((-1*static_parameters.main_pic_start_pt.Y) / paint_scale) + fe_objects.main_mesh.model_mid_pt.Y;
+                    double i_ny = ((-1 * static_parameters.main_pic_start_pt.Y) / paint_scale) + fe_objects.main_mesh.model_mid_pt.Y;
 
                     pslg_datastructure.point2d label_node = new pslg_datastructure.point2d(-10, i_nx, i_ny);
 
