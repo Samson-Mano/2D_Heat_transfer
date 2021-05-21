@@ -1,0 +1,250 @@
+﻿//***************************************************************************************************************************
+
+
+                //for (i = 0; i < inpt_fe_object.main_mesh.all_triangles.Count; i++)
+                //{
+                //    // extract current element
+                //    pslg_datastructure.triangle2d current_element = inpt_fe_object.main_mesh.all_triangles[i];
+
+                //    // extract the edges of the element
+                //    pslg_datastructure.edge2d current_elm_edge1 = inpt_fe_object.main_mesh.all_edges.Find(obj => obj.edge_id == current_element.edge_id[0]);
+                //    pslg_datastructure.edge2d current_elm_edge2 = inpt_fe_object.main_mesh.all_edges.Find(obj => obj.edge_id == current_element.edge_id[1]);
+                //    pslg_datastructure.edge2d current_elm_edge3 = inpt_fe_object.main_mesh.all_edges.Find(obj => obj.edge_id == current_element.edge_id[2]);
+
+                //    // conduction matrix
+                //    matrix_class conduction_matrix = new matrix_class(2, 2);
+                //    conduction_matrix.SetRow(0, new double[] { current_element.thermal_conductivity_x, 0.0 });
+                //    conduction_matrix.SetRow(1, new double[] { 0.0, current_element.thermal_conductivity_y });
+
+                //    // linear shape function parameters
+                //    double a_i, b_i, c_i, a_j, b_j, c_j, a_k, b_k, c_k;
+                //    a_i = (current_element.vertices[1].x * current_element.vertices[2].y) - (current_element.vertices[2].x * current_element.vertices[1].y);
+                //    b_i = current_element.vertices[1].y - current_element.vertices[2].y;
+                //    c_i = current_element.vertices[2].x - current_element.vertices[1].x;
+
+                //    a_j = (current_element.vertices[2].x * current_element.vertices[0].y) - (current_element.vertices[0].x * current_element.vertices[2].y);
+                //    b_j = current_element.vertices[2].y - current_element.vertices[0].y;
+                //    c_j = current_element.vertices[0].x - current_element.vertices[2].x;
+
+                //    a_k = (current_element.vertices[0].x * current_element.vertices[1].y) - (current_element.vertices[1].x * current_element.vertices[0].y);
+                //    b_k = current_element.vertices[0].y - current_element.vertices[1].y;
+                //    c_k = current_element.vertices[1].x - current_element.vertices[0].x;
+
+                //    // B_matrix of linear triangle
+                //    matrix_class b_matrix = new matrix_class(2, 3);
+                //    b_matrix.SetRow(0, new double[] { b_i, b_j, b_k });
+                //    b_matrix.SetRow(1, new double[] { c_i, c_j, c_k });
+
+                //    b_matrix = (1.0 / (2.0 * current_element.element_area)) * b_matrix;
+
+                //    // element conduction matrix
+                //    matrix_class element_conduction_matrix = new matrix_class(3, 3);
+                //    element_conduction_matrix = (current_element.element_thickness * current_element.element_area) * (b_matrix.Transpose() * (conduction_matrix * b_matrix));
+
+                //    // element convection matrix
+                //    double c_param = (-2.0 * current_element.heat_transfer_coeff) / current_element.element_thickness;
+                //    matrix_class element_convection_matrix = new matrix_class(3, 3);
+
+                //    element_convection_matrix.SetRow(0, new double[] { 2, 1, 1 });
+                //    element_convection_matrix.SetRow(1, new double[] { 1, 2, 1 });
+                //    element_convection_matrix.SetRow(2, new double[] { 1, 1, 2 });
+
+                //    element_convection_matrix = (c_param * current_element.element_area / 12.0) * element_convection_matrix;
+
+                //    // element heat convection due to edge exposed to ambient temperature (internal edges shouldn't have convection (user caution is required))
+                //    // element convection due to edge i-j convection
+                //    matrix_class element_edge_ij_convection_matrix = new matrix_class(3, 3);
+
+                //    element_edge_ij_convection_matrix.SetRow(0, new double[] { 2, 1, 0 });
+                //    element_edge_ij_convection_matrix.SetRow(1, new double[] { 1, 2, 0 });
+                //    element_edge_ij_convection_matrix.SetRow(2, new double[] { 0, 0, 0 });
+
+                //    element_edge_ij_convection_matrix = ((current_elm_edge1.heat_transfer_coeff * current_elm_edge1.edge_length * current_element.element_thickness) / 6.0) * element_edge_ij_convection_matrix;
+
+                //    // element convection due to edge j-k convection
+                //    matrix_class element_edge_jk_convection_matrix = new matrix_class(3, 3);
+
+                //    element_edge_jk_convection_matrix.SetRow(0, new double[] { 0, 0, 0 });
+                //    element_edge_jk_convection_matrix.SetRow(1, new double[] { 0, 2, 1 });
+                //    element_edge_jk_convection_matrix.SetRow(2, new double[] { 0, 1, 2 });
+
+                //    element_edge_jk_convection_matrix = ((current_elm_edge2.heat_transfer_coeff * current_elm_edge2.edge_length * current_element.element_thickness) / 6.0) * element_edge_jk_convection_matrix;
+
+                //    // element convection due to edge k-i convection
+                //    matrix_class element_edge_ki_convection_matrix = new matrix_class(3, 3);
+
+                //    element_edge_ki_convection_matrix.SetRow(0, new double[] { 2, 0, 1 });
+                //    element_edge_ki_convection_matrix.SetRow(1, new double[] { 0, 0, 0 });
+                //    element_edge_ki_convection_matrix.SetRow(2, new double[] { 1, 0, 2 });
+
+                //    element_edge_ki_convection_matrix = ((current_elm_edge3.heat_transfer_coeff * current_elm_edge3.edge_length * current_element.element_thickness) / 6.0) * element_edge_ki_convection_matrix;
+
+                //    // element heat source matrix
+                //    matrix_class element_heat_source_matrix = new matrix_class(3, 1);
+
+                //    element_heat_source_matrix.SetColumn(0, new double[] { 1, 1, 1 });
+
+                //    element_heat_source_matrix = ((current_element.heat_source * current_element.element_area * current_element.element_thickness) / 3.0) * element_heat_source_matrix;
+
+                //    // element heat convection 1 matrix
+                //    matrix_class element_heat_convection_matrix = new matrix_class(3, 1);
+
+                //    element_heat_convection_matrix.SetColumn(0, new double[] { 1, 1, 1 });
+
+                //    element_heat_convection_matrix = ((c_param * current_element.ambient_temp * current_element.element_area) / 3.0) * element_heat_convection_matrix;
+
+                //    // edge heat source matrix
+                //    matrix_class edge_heatsource_matrix = new matrix_class(3, 1);
+                //    // edge heat soure due to edge i-j source
+                //    matrix_class edge_ij_heatsource_matrix = new matrix_class(3, 1);
+
+                //    edge_ij_heatsource_matrix.SetColumn(0, new double[] { 1, 1, 0 });
+
+                //    edge_ij_heatsource_matrix = ((current_elm_edge1.heat_source * current_elm_edge1.edge_length * current_element.element_thickness) / 2.0) * edge_ij_heatsource_matrix;
+
+                //    // edge heat soure due to edge j-k source
+                //    matrix_class edge_jk_heatsource_matrix = new matrix_class(3, 1);
+
+                //    edge_jk_heatsource_matrix.SetColumn(0, new double[] { 0, 1, 1 });
+
+                //    edge_jk_heatsource_matrix = ((current_elm_edge2.heat_source * current_elm_edge2.edge_length * current_element.element_thickness) / 2.0) * edge_jk_heatsource_matrix;
+
+                //    // edge heat soure due to edge k-i source
+                //    matrix_class edge_ki_heatsource_matrix = new matrix_class(3, 1);
+
+                //    edge_ki_heatsource_matrix.SetColumn(0, new double[] { 1, 0, 1 });
+
+                //    edge_ki_heatsource_matrix = ((current_elm_edge3.heat_source * current_elm_edge3.edge_length * current_element.element_thickness) / 2.0) * edge_ki_heatsource_matrix;
+
+                //    edge_heatsource_matrix = edge_ij_heatsource_matrix + edge_jk_heatsource_matrix + edge_ki_heatsource_matrix;
+
+                //    // edge heat convection matrix
+                //    matrix_class edge_heatconvection_matrix = new matrix_class(3, 1);
+                //    // edge heat convection due to edge i-j ambient temperature
+                //    matrix_class edge_ij_heatconvection_matrix = new matrix_class(3, 1);
+
+                //    edge_ij_heatconvection_matrix.SetColumn(0, new double[] { 1, 1, 0 });
+
+                //    edge_ij_heatconvection_matrix = ((current_elm_edge1.heat_transfer_coeff * current_elm_edge1.ambient_temp * current_elm_edge1.edge_length * current_element.element_thickness) / 2.0) * edge_ij_heatconvection_matrix;
+
+                //    // edge heat convection due to edge j-k ambient temperature
+                //    matrix_class edge_jk_heatconvection_matrix = new matrix_class(3, 1);
+
+                //    edge_jk_heatconvection_matrix.SetColumn(0, new double[] { 0, 1, 1 });
+
+                //    edge_jk_heatconvection_matrix = ((current_elm_edge2.heat_transfer_coeff * current_elm_edge2.ambient_temp * current_elm_edge2.edge_length * current_element.element_thickness) / 2.0) * edge_jk_heatconvection_matrix;
+
+                //    // edge heat convection due to edge k-i ambient temperature
+                //    matrix_class edge_ki_heatconvection_matrix = new matrix_class(3, 1);
+
+                //    edge_ki_heatconvection_matrix.SetColumn(0, new double[] { 1, 0, 1 });
+
+                //    edge_ki_heatconvection_matrix = ((current_elm_edge3.heat_transfer_coeff * current_elm_edge3.ambient_temp * current_elm_edge3.edge_length * current_element.element_thickness) / 2.0) * edge_ki_heatconvection_matrix;
+
+                //    edge_heatconvection_matrix = edge_ij_heatconvection_matrix + edge_jk_heatconvection_matrix + edge_ki_heatconvection_matrix;
+
+                //    // edge specified temperature matrix
+                //    matrix_class edge_spectemp_matrix = new matrix_class(3, 1);
+                //    // edge i-j specified temperature
+                //    matrix_class edge_ij_spectemp_matrix = new matrix_class(3, 1);
+
+                //    edge_ij_spectemp_matrix.SetColumn(0, new double[] { 1, 1, 0 });
+
+                //    edge_ij_spectemp_matrix = ((current_elm_edge1.specified_temp) / 2.0) * edge_ij_spectemp_matrix;
+
+                //    // edge j-k specified temperature
+                //    matrix_class edge_jk_spectemp_matrix = new matrix_class(3, 1);
+
+                //    edge_jk_spectemp_matrix.SetColumn(0, new double[] { 0, 1, 1 });
+
+                //    edge_jk_spectemp_matrix = ((current_elm_edge2.specified_temp) / 2.0) * edge_jk_spectemp_matrix;
+
+                //    // edge k-i specified temperature
+                //    matrix_class edge_ki_spectemp_matrix = new matrix_class(3, 1);
+
+                //    edge_ki_spectemp_matrix.SetColumn(0, new double[] { 1, 0, 1 });
+
+                //    edge_ki_spectemp_matrix = ((current_elm_edge3.specified_temp) / 2.0) * edge_ki_spectemp_matrix;
+
+                //    edge_spectemp_matrix = edge_ij_spectemp_matrix + edge_jk_spectemp_matrix + edge_ki_spectemp_matrix;
+
+
+                //    // element k matrix
+                //    matrix_class element_k_matrix = new matrix_class(3, 3);
+
+                //    element_k_matrix = element_conduction_matrix + element_convection_matrix + element_edge_ij_convection_matrix + element_edge_jk_convection_matrix + element_edge_ki_convection_matrix;
+
+                //    // element f matrix
+                //    matrix_class element_f_matrix = new matrix_class(3, 1);
+
+                //    element_f_matrix = element_heat_source_matrix + element_heat_convection_matrix + edge_heatsource_matrix + edge_heatconvection_matrix + edge_spectemp_matrix;
+
+                //    // global k matrix
+                //    for (k = 0; k < 3; k++)
+                //    {
+                //        for (j = 0; j < 3; j++)
+                //        {
+                //            // global k matrix
+                //            global_k_matrix[current_element.vertices[k].id, current_element.vertices[j].id] = global_k_matrix[current_element.vertices[k].id, current_element.vertices[j].id] +
+                //                element_k_matrix[k, j];
+
+                //        }
+                //        // global f matrix
+                //        global_f_matrix[current_element.vertices[k].id, 0] = global_f_matrix[current_element.vertices[k].id, 0] + element_f_matrix[k, 0];
+                //    }
+                //}
+
+
+//***************************************************************************************************************************
+
+
+
+
+ for (k = 0; k < 3; k++)
+                    {
+                        int v_index1 = (int)all_elements_matrix[i, 2 + k];
+                        for (j = 0; j < 3; j++)
+                        {
+                            int v_index2 = (int)all_elements_matrix[i, 2 + j];
+                            // global k matrix
+                            global_k_matrix[current_element.vertices[k].id, current_element.vertices[j].id] = global_k_matrix[current_element.vertices[k].id, current_element.vertices[j].id] +
+                                element_k_matrix[k, j];
+
+                        }
+                        // global f matrix
+                        global_f_matrix[current_element.vertices[k].id, 0] = global_f_matrix[current_element.vertices[k].id, 0] + element_f_matrix[k, 0];
+                    }
+
+
+//***************************************************************************************************************************
+
+
+
+                    // apply edge specified temperature as a heat source on other node (to maintain the temperature at the edges)
+                    matrix_class edge_spectemp_as_source_matrix = new matrix_class(3, 1);
+                    // edge i-j specified temperature as a heat source on node k
+                    matrix_class edge_ij_spectemp_as_source_matrix = new matrix_class(3, 1);
+
+                    edge_ij_spectemp_as_source_matrix.SetColumn(0, new double[] { 0, 0, 1 });
+
+                    edge_ij_spectemp_as_source_matrix = (current_elm_edge1.specified_temp  * element_k_matrix[2, 2])  * edge_ij_spectemp_as_source_matrix;
+
+                    // edge j-k specified temperature as a heat source on node i
+                    matrix_class edge_jk_spectemp_as_source_matrix = new matrix_class(3, 1);
+
+                    edge_jk_spectemp_as_source_matrix.SetColumn(0, new double[] { 1, 0, 0 });
+
+                    edge_jk_spectemp_as_source_matrix = (current_elm_edge2.specified_temp * element_k_matrix[0, 0]) * edge_jk_spectemp_as_source_matrix;
+
+                    // edge k-i specified temperature as a heat source on node j
+                    matrix_class edge_ki_spectemp_as_source_matrix = new matrix_class(3, 1);
+
+                    edge_ki_spectemp_as_source_matrix.SetColumn(0, new double[] { 0, 1, 0 });
+
+                    edge_ki_spectemp_as_source_matrix = (current_elm_edge3.specified_temp* element_k_matrix[1, 1]) * edge_ki_spectemp_as_source_matrix;
+
+                    edge_spectemp_as_source_matrix = edge_ij_spectemp_as_source_matrix + edge_jk_spectemp_as_source_matrix + edge_ki_spectemp_as_source_matrix;
+
+
+
+//***************************************************************************************************************************
