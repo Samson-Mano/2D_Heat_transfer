@@ -175,6 +175,9 @@ namespace Heat2D_solver.Data_structure
                 {
                     // paint the results
                     gr1.SmoothingMode = SmoothingMode.None;
+                    gr1.InterpolationMode = InterpolationMode.HighQualityBilinear;
+                    // gr1.CompositingQuality = CompositingQuality.HighQuality;
+                    // gr1.CompositingMode = CompositingMode.SourceCopy;
                     result_values.paint_me(ref gr1, ref bef_trans, model_mid_pt, ref paint_scale);
                 }
                 else
