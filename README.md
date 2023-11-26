@@ -1,4 +1,12 @@
-# 2D Heat transfer solver 
+# 2D Heat transfer solver (Superseeded)
+
+IMPORTANT!!!!!!
+This repository is no longer actively maintained. A more up-to-date version of the 2D Heat Transfer Solver is available in a new repository.
+
+**New Repository:** [Heat2D_solver_cpp](https://github.com/Samson-Mano/Heat2D_solver_cpp)
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
 Finite element analysis of steady state 2D heat transfer problems. Heat transfer occurs when there is a temperature difference within a body or within a body and its surrounding medium. Conduction and convection problems are solved using this software. <br /><br /> Heat diffusion equation which is the special case partial differential equation of the Helmholtz equation is solved.<br /><br />
 ## Example 1:<br /><br />
 Heat conduction problem with inside and outside convective boundary with 150 deg & 10 ambient temperature respectively. <br /><br />
